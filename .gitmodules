@@ -1,6 +1,6 @@
 [submodule "Romi.Standard.IO"]
 	path = Romi.Standard.IO
 	url = git@github.com:romi-project/Romi.Standard.IO.git
-[submodule "Romi.Standard.Socket"]
-	path = Romi.Standard.Socket
-	url = git@github.com:romi-project/Romi.Standard.Socket.git
+[submodule "Romi.Standard.Sockets"]
+	path = Romi.Standard.Sockets
+	url = git@github.com:romi-project/Romi.Standard.Sockets.git

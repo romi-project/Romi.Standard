@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard", "Romi.Stand
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.IO", "Romi.Standard.IO\Romi.Standard.IO.csproj", "{C0D2A9E4-8D52-48B3-B758-841AF3BD6ECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.Socket", "Romi.Standard.Socket\Romi.Standard.Socket.csproj", "{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.Sockets", "Romi.Standard.Sockets\Romi.Standard.Sockets.csproj", "{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
