@@ -35,24 +35,50 @@ namespace Romi.Standard.Tests.Net.SimpleTcp
             Assert.Pass();
         }
 
+        [Test]
+        public void MultiClientTest()
+        {
+            var clients = new TcpClient[5];
+            for (var i = 0; i < clients.Length; i++)
+            {
+                clients[i] = new TcpClient();
+                clients[i].Connect(_endPoint);
+            }
+            Thread.Sleep(1000);
+            Assert.AreEqual(clients.Length, _server.GetClientNum());
+            foreach (var t in clients)
+            {
+                t.Close();
+            }
+            Thread.Sleep(1000);
+            Assert.AreEqual(0, _server.GetClientNum());
+            Assert.Pass();
+        }
+
+        [Test]
+        public void VeryManyClientTest()
+        {
+            var clients = new TcpClient[200];
+            for (var i = 0; i < clients.Length; i++)
+            {
+                clients[i] = new TcpClient();
+                clients[i].Connect(_endPoint);
+            }
+            Thread.Sleep(1000);
+            Assert.AreEqual(clients.Length, _server.GetClientNum());
+            foreach (var t in clients)
+            {
+                t.Close();
+            }
+            Thread.Sleep(1000);
+            Assert.AreEqual(0, _server.GetClientNum());
+            Assert.Pass();
+        }
+
         [TearDown]
         public void CleanUp()
         {
             _server.Stop();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -53,15 +53,12 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
             using var bw = new BinaryWriter(ms);
             bw.Write((short)0x00);
             SendPacket(ms.ToArray());
-            Console.WriteLine($"Incoming new connection: {RemoteAddress} / {ServerApp.GetClientNum()}");
         }
 
         public override void OnClose()
         {
             base.OnClose();
             ServerApp.RemoveClient(this);
-            Console.WriteLine($"Closed connection: {RemoteAddress} / {ServerApp.GetClientNum()}");
-            Console.WriteLine($"Closed reason: {CloseReason}");
         }
     }
 }
