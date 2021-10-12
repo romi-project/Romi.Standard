@@ -7,7 +7,7 @@ using Romi.Standard.Sockets.Net;
 
 namespace Romi.Standard.Tests
 {
-    public class SocketListenTest
+    public class SocketListenerTest
     {
         private SocketThread _socketThread;
 
