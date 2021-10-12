@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 
-namespace Romi.Standard.Tests
+namespace Romi.Standard.Tests.Net
 {
-    public static class TestUtility
+    public static class SocketTestUtility
     {
         private static readonly Random Random = new();
         private const int MaxTry = 200;

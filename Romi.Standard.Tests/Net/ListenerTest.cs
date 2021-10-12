@@ -1,13 +1,12 @@
-using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using NUnit.Framework;
 using Romi.Standard.Sockets.Net;
 
-namespace Romi.Standard.Tests
+namespace Romi.Standard.Tests.Net
 {
-    public class SocketListenerTest
+    public class ListenerTest
     {
         private SocketThread _socketThread;
 
@@ -23,7 +22,7 @@ namespace Romi.Standard.Tests
         {
             var local = IPAddress.Loopback;
             var listener = new TestListener(local.AddressFamily, _socketThread);
-            var port = TestUtility.GetFreePort();
+            var port = SocketTestUtility.GetFreePort();
             try
             {
                 listener.Bind(new IPEndPoint(local, port));
@@ -46,7 +45,7 @@ namespace Romi.Standard.Tests
             var local = IPAddress.Loopback;
             var listener = new TestListener(local.AddressFamily, _socketThread);
             var connector = new TestConnector(local.AddressFamily, _socketThread);
-            var port = TestUtility.GetFreePort();
+            var port = SocketTestUtility.GetFreePort();
             try
             {
                 var endPoint = new IPEndPoint(local, port);
@@ -85,7 +84,7 @@ namespace Romi.Standard.Tests
         public volatile int ClosedCount = 0;
 
         public TestListener(AddressFamily addressFamily, SocketThread socketThread)
-            : base(new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp), socketThread)
+            : base(addressFamily, socketThread)
         {
         }
 

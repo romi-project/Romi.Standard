@@ -4,9 +4,9 @@ using System.Threading;
 using NUnit.Framework;
 using Romi.Standard.Sockets.Net;
 
-namespace Romi.Standard.Tests
+namespace Romi.Standard.Tests.Net
 {
-    public class SocketConnectorTest
+    public class ConnectorTest
     {
         private SocketThread _socketThread;
 
@@ -24,7 +24,7 @@ namespace Romi.Standard.Tests
             var conn = new TestConnector(local.AddressFamily, _socketThread);
             var socket = conn.ConnectRaw(new IPEndPoint(local, 12));
             Assert.IsNull(socket);
-            Assert.AreEqual(conn.ClosedCount, 1);
+            Assert.AreEqual(1, conn.ClosedCount);
             Assert.Pass();
         }
 
@@ -33,11 +33,11 @@ namespace Romi.Standard.Tests
         {
             var local = IPAddress.Loopback;
             var conn = new TestConnector(local.AddressFamily, _socketThread);
-            var port = TestUtility.GetLocalListeningPort();
+            var port = SocketTestUtility.GetLocalListeningPort();
             var socket = conn.ConnectRaw(new IPEndPoint(local, port));
             Assert.IsNotNull(socket);
-            Assert.AreEqual(conn.ClosedCount, 0);
-            Assert.AreEqual(conn.ConnectedCount, 1);
+            Assert.AreEqual(0, conn.ClosedCount);
+            Assert.AreEqual(1, conn.ConnectedCount);
             socket.Close();
             Assert.Pass();
         }
@@ -55,7 +55,7 @@ namespace Romi.Standard.Tests
         public volatile int ClosedCount = 0;
 
         public TestConnector(AddressFamily addressFamily, SocketThread socketThread)
-            : base(new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp), socketThread)
+            : base(addressFamily, socketThread)
         {
         }
 
