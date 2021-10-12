@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.IO", "Romi.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.Sockets", "Romi.Standard.Sockets\Romi.Standard.Sockets.csproj", "{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romi.Standard.Tests", "Romi.Standard.Tests\Romi.Standard.Tests.csproj", "{AE1748A6-DACD-4982-B010-CDEDFAE087FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E9EFC42-5CD3-4FFB-8FA6-99E23CCD45D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE1748A6-DACD-4982-B010-CDEDFAE087FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE1748A6-DACD-4982-B010-CDEDFAE087FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE1748A6-DACD-4982-B010-CDEDFAE087FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE1748A6-DACD-4982-B010-CDEDFAE087FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
