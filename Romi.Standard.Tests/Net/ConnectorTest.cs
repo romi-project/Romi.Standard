@@ -67,7 +67,6 @@ namespace Romi.Standard.Tests.Net
 
         public override void OnClose()
         {
-            base.OnClose();
             Interlocked.Increment(ref ClosedCount);
         }
     }

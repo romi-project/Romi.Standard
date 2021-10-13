@@ -22,57 +22,43 @@ namespace Romi.Standard.Tests.Net.SimpleTcp
             _server.Start();
         }
 
-        [Test]
+        [Test, Timeout(30000)]
         public void SingleClientTest()
         {
-            var tcpClient = new TcpClient();
-            tcpClient.Connect(_endPoint);
-            Thread.Sleep(1000);
-            Assert.AreEqual(1, _server.GetClientNum());
-            tcpClient.Close();
-            Thread.Sleep(1000);
-            Assert.AreEqual(0, _server.GetClientNum());
+            TestNumberClient(1);
             Assert.Pass();
         }
 
-        [Test]
+        [Test, Timeout(30000)]
         public void MultiClientTest()
         {
-            var clients = new TcpClient[5];
-            for (var i = 0; i < clients.Length; i++)
-            {
-                clients[i] = new TcpClient();
-                clients[i].Connect(_endPoint);
-            }
-            Thread.Sleep(1000);
-            Assert.AreEqual(clients.Length, _server.GetClientNum());
-            foreach (var t in clients)
-            {
-                t.Close();
-            }
-            Thread.Sleep(1000);
-            Assert.AreEqual(0, _server.GetClientNum());
+            TestNumberClient(5);
             Assert.Pass();
         }
 
-        [Test]
+        [Test, Timeout(30000)]
         public void VeryManyClientTest()
         {
-            var clients = new TcpClient[200];
+            TestNumberClient(200);
+            Assert.Pass();
+        }
+
+        private void TestNumberClient(int clientNumber)
+        {
+            var clients = new TcpClient[clientNumber];
             for (var i = 0; i < clients.Length; i++)
             {
                 clients[i] = new TcpClient();
                 clients[i].Connect(_endPoint);
             }
-            Thread.Sleep(1000);
-            Assert.AreEqual(clients.Length, _server.GetClientNum());
+            while(clients.Length != _server.GetClientNum())
+                Thread.Sleep(50);
             foreach (var t in clients)
             {
                 t.Close();
             }
-            Thread.Sleep(1000);
-            Assert.AreEqual(0, _server.GetClientNum());
-            Assert.Pass();
+            while(0 != _server.GetClientNum())
+                Thread.Sleep(50);
         }
 
         [TearDown]

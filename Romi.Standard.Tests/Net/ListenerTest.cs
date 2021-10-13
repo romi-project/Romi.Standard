@@ -90,14 +90,12 @@ namespace Romi.Standard.Tests.Net
 
         public override void OnAccept()
         {
-            base.OnAccept();
             Interlocked.Increment(ref AcceptedCount);
             _eventWaitHandle.Set();
         }
 
         public override void OnClose()
         {
-            base.OnClose();
             Interlocked.Increment(ref ClosedCount);
             _eventWaitHandle.Set();
         }

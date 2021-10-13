@@ -1,4 +1,6 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using Romi.Standard.Sockets.Net;
@@ -7,7 +9,7 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
 {
     public class SimpleTcpServerApp
     {
-        private readonly List<SimpleTcpClient_Server> _clients = new();
+        private readonly ConcurrentDictionary<int, SimpleTcpClient_Server> _clients = new();
         private readonly Listener _listener;
         private readonly IPEndPoint _endPoint;
         private readonly SocketThread _socketThread;
@@ -32,7 +34,7 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
         public void Stop()
         {
             _listener.Close();
-            foreach (var client in _clients.ToArray())
+            foreach (var client in _clients.Values.ToArray())
                 client.Close();
             _socketThread.Stop();
             _socketThread.WaitForEnd();
@@ -40,12 +42,12 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
 
         public void AddClient(SimpleTcpClient_Server client)
         {
-            _clients.Add(client);
+            _clients.TryAdd(client.SocketId, client);
         }
 
         public void RemoveClient(SimpleTcpClient_Server client)
         {
-            _clients.Remove(client);
+            _clients.TryRemove(client.SocketId, out _);
         }
 
         public int GetClientNum()
@@ -55,7 +57,7 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
 
         public void BroadcastPacket(byte[] content)
         {
-            foreach (var client in _clients.ToArray())
+            foreach (var client in _clients.Values.ToArray())
                 client.SendPacket(content);
         }
     }

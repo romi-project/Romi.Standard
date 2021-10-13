@@ -21,22 +21,21 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Client
 
         public override void OnConnect()
         {
-            base.OnConnect();
             ClientApp.AddClient(this);
         }
 
         public override void OnClose()
         {
-            base.OnClose();
             ClientApp.RemoveClient(this);
         }
 
         protected override void OnPacket(byte[] data)
         {
+            //data.Print("CLI:R", this);
             using var ms = new MemoryStream(data);
             using var br = new BinaryReader(ms);
             using var ws = new MemoryStream();
-            using var bw = new BinaryWriter(ms);
+            using var bw = new BinaryWriter(ws);
             int op = br.ReadInt16();
             switch (op)
             {
@@ -58,6 +57,12 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Client
                     break;
                 }
             }
+        }
+
+        public override void SendPacket(byte[] data)
+        {
+            //data.Print($"CLI:S", this);
+            base.SendPacket(data);
         }
     }
 }

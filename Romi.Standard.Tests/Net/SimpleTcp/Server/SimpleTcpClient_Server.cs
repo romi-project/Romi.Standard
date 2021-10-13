@@ -18,6 +18,7 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
 
         protected override void OnPacket(byte[] data)
         {
+            //data.Print("SVR:R", this);
             using var ms = new MemoryStream(data);
             using var br = new BinaryReader(ms);
             using var ws = new MemoryStream();
@@ -47,18 +48,18 @@ namespace Romi.Standard.Tests.Net.SimpleTcp.Server
 
         public override void OnConnect()
         {
-            base.OnConnect();
             ServerApp.AddClient(this);
-            using var ms = new MemoryStream();
-            using var bw = new BinaryWriter(ms);
-            bw.Write((short)0x00);
-            SendPacket(ms.ToArray());
         }
 
         public override void OnClose()
         {
-            base.OnClose();
             ServerApp.RemoveClient(this);
+        }
+
+        public override void SendPacket(byte[] data)
+        {
+            //data.Print($"SVR:S", this);
+            base.SendPacket(data);
         }
     }
 }
