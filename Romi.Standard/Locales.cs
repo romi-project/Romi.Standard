@@ -127,14 +127,14 @@ public static class Locales
 				length = eLength;
 			}
 			if (encoding == null)
-				encoding = Codepage949;
+				encoding = UTF8;
 			return encoding.GetString(value, 0, length);
 		}
 
 		public static byte[] DecodeString(string value, int len = 0, Encoding encoding = null)
 		{
 			if (encoding == null)
-				encoding = Codepage949;
+				encoding = UTF8;
 			var bytes = encoding.GetBytes(value);
 			if (len == 0)
 			{
